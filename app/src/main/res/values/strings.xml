@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name" translatable="false">KURSOVAYA</string>
+    <string name="mainName" translatable="false">EasyDishes</string>
+    <string name="login_hint">Введите логин</string>
+    <string name="password_hint">Введите пароль</string>
+    <string name="password_repeat_hint">Повторите пароль</string>
+    <string name="authentication">Авторизация</string>
+    <string name="registration">Регистрация</string>
+    <string name="button_continue">Продолжить</string>
+    <string name="singup_hint">Нет аккаунта? Создайте сейчас!</string>
+    <string name="log_in_hint">Есть аккаунт? Войдите сейчас!</string>
+    <string name="hint_by_name">Поиск по названию</string>
+    <string name="search_button">Найти</string>
+    <string name="hint_by_ingredients">Поиск по ингредиентам</string>
+    <string name="errorText">error</string>
+</resources>

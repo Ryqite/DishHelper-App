@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "420918665055",
+    "firebase_url": "https://kurs-9df55-default-rtdb.firebaseio.com",
+    "project_id": "kurs-9df55",
+    "storage_bucket": "kurs-9df55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420918665055:android:6e505af186c5d324d8a0ea",
+        "android_client_info": {
+          "package_name": "com.example.kursovaya"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj35m6zMb_QFIY6YwugZqUgWotbngCpck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

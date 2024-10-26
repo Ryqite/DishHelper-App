@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="singup_hint">No account yet? Sing up now</string>
+    <string name="login_hint">Enter login</string>
+    <string name="password_hint">Enter password</string>
+    <string name="password_repeat_hint">Repeat password</string>
+    <string name="authentication">Authorization</string>
+    <string name="registration">Registration</string>
+    <string name="button_continue">Continue</string>
+    <string name="log_in_hint">Have an account? Login now</string>
+    <string name="hint_by_name">Search by name</string>
+    <string name="search_button">Search</string>
+    <string name="hint_by_ingredients">Search by ingredients</string>
+</resources>
