@@ -18,14 +18,18 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.example.kursovaya.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        auth = Firebase.auth
         binding.loginButtonContinue.setOnClickListener{
             var loginLogin: String = binding.loginText.getText().toString()
             var passwordLogin: String=binding.loginPasswordText.getText().toString()
@@ -36,6 +40,15 @@ class MainActivity : AppCompatActivity() {
             var passwordSingup: String=binding.singupPasswordText.getText().toString()
             var passwordRepeatSingup: String=binding.singupPasswordRepeatText.getText().toString()
             checkPasswords(passwordSingup,passwordRepeatSingup,binding.singupButtonContinue)
+        }
+    }
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val intent = Intent(this, MainMenuActivity::class.java)
+            startActivity(intent)
         }
     }
     fun checkPasswords(passwordSingup: String,passwordRepeatSingup: String,v: View){
