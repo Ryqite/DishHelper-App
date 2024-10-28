@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     }
     fun startNewActivity(v: View){
     val intent = Intent(this, MainMenuActivity::class.java)
-        startActivity(intent)
+    startActivity(intent)
     }
     fun finishProcess(v: View){
         finishAffinity()
