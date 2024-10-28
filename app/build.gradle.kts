@@ -51,9 +51,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("androidx.core:core-ktx:1.13.1") // или последнюю версию core-ktx
+    implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.activity:activity-ktx:1.9.3")
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation("com.google.firebase:firebase-auth")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("com.google.firebase:firebase-database:21.0.0")
+    implementation("com.firebaseui:firebase-ui-database:8.0.2")
 }
 

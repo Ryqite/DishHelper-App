@@ -107,40 +107,10 @@
             android:layout_height="4dp"
             android:background="@color/divider1" />
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/errorText">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TableLayout
-                    android:id="@+id/tableLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </TableLayout>
-            </LinearLayout>
-        </ScrollView>
+            android:layout_weight="1" />
 
         <View
             android:id="@+id/divider3"
@@ -148,18 +118,26 @@
             android:layout_height="4dp"
             android:background="@color/low_divider" />
 
-        <SearchView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="55dp"
-            android:background="@drawable/ic_corners"
-            android:backgroundTint="@color/white"
-            android:iconifiedByDefault="false"
-            android:queryBackground="@android:color/transparent"
-            android:queryHint="@string/hint_by_name" />
+            android:layout_height="120dp">
+
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/ic_corners"
+                android:backgroundTint="@color/white"
+                android:iconifiedByDefault="false"
+                android:queryBackground="@android:color/transparent"
+                android:queryHint="@string/hint_by_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
