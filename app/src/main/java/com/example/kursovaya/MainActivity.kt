@@ -2,6 +2,7 @@ package com.example.kursovaya
 
 import android.content.Intent
 import android.os.Bundle
+import android.renderscript.ScriptGroup
 import android.view.View
 import android.widget.Button
 import android.widget.TableLayout
@@ -16,46 +17,46 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import com.example.kursovaya.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-//        var editTextLoginLogin=findViewById<EditText>(R.id.loginText)
-//        var editTextPasswordLogin=findViewById<EditText>(R.id.loginPasswordText)
-//        var editTextLoginSingup=findViewById<EditText>(R.id.singupLoginText)
-//        var editTextPasswordSingup=findViewById<EditText>(R.id.singupPasswordText)
-//        var editTextPasswordRepeat=findViewById<EditText>(R.id.singupPasswordRepeatText)
-//        var loginButton=findViewById<Button>(R.id.loginButtonContinue)
-//        var singupButton=findViewById<Button>(R.id.singupButtonContinue)
-//        loginButton.setOnClickListener{
-//            var loginLogin: String = editTextLoginLogin.getText().toString()
-//            var passwordLogin: String=editTextPasswordLogin.getText().toString()
-//        }
-//        singupButton.setOnClickListener{
-//            var loginSingup: String=editTextLoginSingup.getText().toString()
-//            var passwordSingup: String=editTextPasswordSingup.getText().toString()
-//            var passwordRepeatSingup: String=editTextPasswordRepeat.getText().toString()
-//            if(passwordSingup!=passwordRepeatSingup)
-//            {
-//                Toast.makeText(this,"Passwords aren't same", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-    }
+        binding= ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    lateinit var login_hint:  TextView
-    lateinit var singup_hint: TextView
+        binding.loginButtonContinue.setOnClickListener{
+            var loginLogin: String = binding.loginText.getText().toString()
+            var passwordLogin: String=binding.loginPasswordText.getText().toString()
+            startNewActivity(binding.loginButtonContinue)
+        }
+        binding.singupButtonContinue.setOnClickListener{
+            var loginSingup: String=binding.singupLoginText.getText().toString()
+            var passwordSingup: String=binding.singupPasswordText.getText().toString()
+            var passwordRepeatSingup: String=binding.singupPasswordRepeatText.getText().toString()
+            checkPasswords(passwordSingup,passwordRepeatSingup,binding.singupButtonContinue)
+        }
+    }
+    fun checkPasswords(passwordSingup: String,passwordRepeatSingup: String,v: View){
+        if(passwordSingup!=passwordRepeatSingup)
+            {
+                Toast.makeText(this,"Passwords aren't same", Toast.LENGTH_SHORT).show()
+            }
+        else if(passwordSingup.length<6){
+            Toast.makeText(this,"Password are less than 6 symbols", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            startNewActivity(v)
+        }
+    }
     fun changeToLogin(v: View){
-        val login_hint=findViewById<LinearLayout>(R.id.loginLayout)
-        val singup_hint=findViewById<LinearLayout>(R.id.singupLayout)
-        login_hint.isVisible=true
-        singup_hint.isVisible=false
+        binding.loginLayout.isVisible=true
+        binding.singupLayout.isVisible=false
     }
     fun changeToSingup(v: View){
-        val login=findViewById<LinearLayout>(R.id.loginLayout)
-        val singup=findViewById<LinearLayout>(R.id.singupLayout)
-        login.isVisible=false
-        singup.isVisible=true
+        binding.loginLayout.isVisible=false
+        binding.singupLayout.isVisible=true
     }
     fun startNewActivity(v: View){
     val intent = Intent(this, MainMenuActivity::class.java)
