@@ -13,4 +13,5 @@
     <string name="search_button">Найти</string>
     <string name="hint_by_ingredients">Поиск по ингредиентам</string>
     <string name="errorText">error</string>
+    <string name="dish_icon">Icon</string>
 </resources>

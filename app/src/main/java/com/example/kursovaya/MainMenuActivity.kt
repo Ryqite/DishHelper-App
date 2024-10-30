@@ -11,12 +11,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kursovaya.databinding.ActivityMainPageBinding
 
 class MainMenuActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainPageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_page)
-
+        binding = ActivityMainPageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.recyclerView.setLayoutManager(LinearLayoutManager(this))
     }
     fun finishProcess(v: View){
         finishAffinity()

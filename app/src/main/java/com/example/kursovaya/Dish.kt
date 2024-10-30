@@ -1,6 +1,8 @@
 package com.example.kursovaya
 
 data class Dish(
-    val imageResId: Int, // ID ресурса изображения
-    val name: String
+    val image: String,
+    val name: String,
+    val composition: String,
+    val recipe: String
 )
