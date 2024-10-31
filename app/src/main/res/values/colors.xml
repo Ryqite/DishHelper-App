@@ -8,4 +8,6 @@
     <color name="divider1">#1A2DFF</color>
     <color name="btn_page_2">#4452EF</color>
     <color name="low_divider">#51047C</color>
+    <color name="item_top_bg">#6AEDE6</color>
+    <color name="item_bot_bg">#868FE7</color>
 </resources>
