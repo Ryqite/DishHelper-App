@@ -27,10 +27,6 @@ class ListDishes(options: FirebaseRecyclerOptions<DishItem>): FirebaseRecyclerAd
             .placeholder(com.google.android.gms.base.R.drawable.common_google_signin_btn_icon_dark)
             .error(com.google.android.gms.base.R.drawable.common_google_signin_btn_icon_dark_normal)
             .into(holder.image)
-        holder.itemView.setOnClickListener{
-            val intent= Intent(holder.itemView.context, ActivityDishPage::class.java)
-            holder.itemView.context.startActivity(intent)
-        }
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,

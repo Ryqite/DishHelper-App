@@ -37,6 +37,10 @@ class MainMenuActivity : AppCompatActivity() {
     fun finishProcess(v: View){
         finishAffinity()
     }
+    fun startDishPage(v: View){
+    val intent = Intent(this, ActivityDishPage::class.java)
+    startActivity(intent)
+    }
     override fun onStop() {
         super.onStop()
         listDishes.stopListening()
