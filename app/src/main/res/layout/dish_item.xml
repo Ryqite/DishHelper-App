@@ -6,13 +6,14 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="6dp"
     app:cardUseCompatPadding="true"
+    tools:context=".MainMenuActivity"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/item_bg"
-        android:onClick="startDishPage"
         android:padding="15dp">
 
         <ImageView
@@ -31,12 +32,12 @@
             android:layout_height="80dp"
             android:layout_marginStart="10dp"
             android:gravity="center"
-            android:text="Цезарь"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/dish_icon"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Цезарь">
 
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
