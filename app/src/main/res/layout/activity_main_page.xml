@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="4dp"
             android:layout_marginTop="5dp"
-            android:background="@color/divider1" />
+            android:background="@color/low_divider" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,8 +59,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="1dp"
                     android:gravity="center"
-                    android:text="Exit"
-                    android:textColor="@color/divider1"
+                    android:text="@string/exit"
+                    android:textColor="@color/low_divider"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -68,10 +68,10 @@
                 android:id="@+id/vertical_divider1"
                 android:layout_width="3dp"
                 android:layout_height="match_parent"
-                android:background="@color/divider1" />
+                android:background="@color/low_divider" />
 
             <SearchView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
@@ -88,13 +88,13 @@
                 android:id="@+id/vertical_divider2"
                 android:layout_width="3dp"
                 android:layout_height="match_parent"
-                android:background="@color/divider1" />
+                android:background="@color/low_divider" />
 
             <android.widget.Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/btn_page_2"
+                android:background="@color/low_divider"
                 android:text="@string/search_button"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -105,12 +105,12 @@
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="4dp"
-            android:background="@color/divider1" />
+            android:background="@color/low_divider" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="0dp"
             android:layout_weight="1" />
 
         <View

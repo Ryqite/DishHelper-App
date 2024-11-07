@@ -14,4 +14,8 @@
     <string name="hint_by_ingredients">Поиск по ингредиентам</string>
     <string name="errorText">error</string>
     <string name="dish_icon">Icon</string>
+    <string name="composition_title">Состав:</string>
+    <string name="recipe_text">Рецепт:</string>
+    <string name="exit">Exit</string>
+    <string name="content_error">Content_error</string>
 </resources>

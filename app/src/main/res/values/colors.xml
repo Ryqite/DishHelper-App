@@ -10,4 +10,5 @@
     <color name="low_divider">#51047C</color>
     <color name="item_top_bg">#6AEDE6</color>
     <color name="item_bot_bg">#868FE7</color>
+    <color name="image_name_bg">#7FF2205B</color>
 </resources>
