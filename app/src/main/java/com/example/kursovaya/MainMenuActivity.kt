@@ -2,8 +2,13 @@ package com.example.kursovaya
 import com.bumptech.glide.Glide
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -31,7 +36,25 @@ class MainMenuActivity : AppCompatActivity() {
             .build();
         listDishes= ListDishes(options)
         listDishes.startListening()
-        binding.recyclerView.adapter=listDishes
+        val searchView: SearchView=binding.searchName
+        if(searchView.query.isEmpty())
+        {
+            binding.recyclerView.adapter=listDishes
+        }
+        searchView.clearFocus()
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // Вызывается при отправке поискового запроса
+                textSearch(query)
+                return true
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                // Вызывается при изменении текста поискового запроса
+                textSearch(query)
+                return true
+            }
+        })
     }
 
     fun finishProcess(v: View){
@@ -39,10 +62,20 @@ class MainMenuActivity : AppCompatActivity() {
     }
     fun startDishPage(v: View){
     val intent = Intent(this, ActivityDishPage::class.java)
+    intent.putExtra("dishId", "dish1")
     startActivity(intent)
     }
     override fun onStop() {
         super.onStop()
         listDishes.stopListening()
+    }
+    fun textSearch(str: String){
+        val options :FirebaseRecyclerOptions<DishItem> = FirebaseRecyclerOptions
+            .Builder<DishItem>()
+            .setQuery(FirebaseDatabase.getInstance().getReference().child("dishes").orderByChild("name").startAt(str).endAt(str+"."), DishItem::class.java)
+            .build();
+        val sortedList: ListDishes= ListDishes(options)
+        sortedList.startListening()
+        binding.recyclerView.adapter=sortedList
     }
 }
