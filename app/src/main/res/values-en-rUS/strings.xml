@@ -9,6 +9,11 @@
     <string name="button_continue">Continue</string>
     <string name="log_in_hint">Have an account? Login now</string>
     <string name="hint_by_name">Search by name</string>
-    <string name="search_button">Search</string>
     <string name="hint_by_ingredients">Search by ingredients</string>
+    <string name="errorText">Error</string>
+    <string name="dish_icon">Icon</string>
+    <string name="composition_title">Composition:</string>
+    <string name="recipe_text">Recipe:</string>
+    <string name="exit">Exit</string>
+    <string name="content_error">Content_error</string>
 </resources>

@@ -36,4 +36,37 @@ class ListDishes(options: FirebaseRecyclerOptions<DishItem>): FirebaseRecyclerAd
         var name: TextView=itemView.findViewById(R.id.dish_name)
 
     }
-}
+}//fun textCompositionSearch(str: String) {
+//    val searchList = ArrayList<DishItem>()
+//    FirebaseDatabase.getInstance().getReference().child("dishes").orderByChild("name").addChildEventListener(object : ChildEventListener {
+//        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+//            val dishItem = snapshot.getValue(DishItem::class.java)
+//            if (dishItem != null && dishItem.name.contains(str)) {
+//                searchList.add(dishItem)
+//            }
+//            val options :FirebaseRecyclerOptions<DishItem> = FirebaseRecyclerOptions
+//                .Builder<DishItem>()
+//                .setQuery(searchList, DishItem::class.java)
+//                .build();
+//            val sortedList: ListDishes = ListDishes(options)
+//            sortedList.startListening()
+//            binding.recyclerView.adapter = sortedList
+//        }
+//
+//        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+//            // Пустая реализация
+//        }
+//
+//        override fun onChildRemoved(snapshot: DataSnapshot) {
+//            // Пустая реализация
+//        }
+//
+//        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+//            // Пустая реализация
+//        }
+//
+//        override fun onCancelled(error: DatabaseError) {
+//            // Пустая реализация
+//        }
+//    })
+//}

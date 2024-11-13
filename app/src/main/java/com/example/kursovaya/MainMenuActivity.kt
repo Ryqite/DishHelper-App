@@ -24,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase
 
 class MainMenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainPageBinding
-    private lateinit var dishList: ArrayList<DishItem>
     lateinit var listDishes: ListDishes
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,22 +40,34 @@ class MainMenuActivity : AppCompatActivity() {
         listDishes = ListDishes(options)
         listDishes.startListening()
         binding.recyclerView.adapter = listDishes
-
-        binding.searchName.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchComposition.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // Вызывается при отправке поискового запроса
-                textSearch(query)
+                textCompositionSearch(query)
                 return false
             }
 
             override fun onQueryTextChange(query: String): Boolean {
                 // Вызывается при изменении текста поискового запроса
-                textSearch(query)
+                textCompositionSearch(query)
                 return true
             }
 
         })
+        binding.searchName.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // Вызывается при отправке поискового запроса
+                textNameSearch(query)
+                return false
+            }
 
+            override fun onQueryTextChange(query: String): Boolean {
+                // Вызывается при изменении текста поискового запроса
+                textNameSearch(query)
+                return true
+            }
+
+        })
     }
 
     fun finishProcess(v: View) {
@@ -68,14 +79,24 @@ class MainMenuActivity : AppCompatActivity() {
         intent.putExtra("dishId", "dish1")
         startActivity(intent)
     }
-
+    fun backToAuthentication(v: View) {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
     override fun onStop() {
         super.onStop()
         listDishes.stopListening()
     }
-
-    fun textSearch(str: String) {
-        val searchList = ArrayList<DishItem>()
+    fun textCompositionSearch(str: String) {
+            val options: FirebaseRecyclerOptions<DishItem> = FirebaseRecyclerOptions
+                .Builder<DishItem>()
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("dishes").orderByChild("composition").startAt(str).endAt("$str\uf8ff"), DishItem::class.java)
+                .build()
+            val sortedList = ListDishes(options)
+            sortedList.startListening()
+            binding.recyclerView.adapter = sortedList
+    }
+    fun textNameSearch(str: String) {
         val options :FirebaseRecyclerOptions<DishItem> = FirebaseRecyclerOptions
             .Builder<DishItem>()
             .setQuery(FirebaseDatabase.getInstance().getReference().child("dishes").orderByChild("name").startAt(str).endAt(str + "\uf8ff"), DishItem::class.java)
