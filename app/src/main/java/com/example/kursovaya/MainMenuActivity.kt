@@ -102,7 +102,7 @@ class MainMenuActivity : AppCompatActivity() {
                         dishes.add(dish)
                     }
                 }
-                var keyWords=str.split(","," ")
+                var keyWords=str.split(",",", "," ,")
                 val filteredDishes = dishes.filter {dish->
                     keyWords.all { keyWord->
                          dish.composition.contains(keyWord,ignoreCase = true)
