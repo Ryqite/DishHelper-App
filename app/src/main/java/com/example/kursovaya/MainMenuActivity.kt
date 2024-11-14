@@ -102,30 +102,15 @@ class MainMenuActivity : AppCompatActivity() {
                         dishes.add(dish)
                     }
                 }
-                // Устанавливаем адаптер для полного списка блюд
-                var adapter = Dish(dishes)
+                var keyWords=str.split(","," ")
+                val filteredDishes = dishes.filter {dish->
+                    keyWords.all { keyWord->
+                         dish.composition.contains(keyWord,ignoreCase = true)
+                    }
+                }.toMutableList()
+                val adapter = Dish(filteredDishes)
                 binding.recyclerView.adapter = adapter
-
-                // Устанавливаем слушатель SearchView
-                binding.searchComposition.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                    override fun onQueryTextSubmit(query: String): Boolean {
-                        return false
-                    }
-
-                    override fun onQueryTextChange(newText: String): Boolean {
-                        // Фильтруем список блюд по подстроке в поле composition
-                        val filteredDishes = dishes.filter {
-                            it.composition.contains(newText, ignoreCase = true)
-                        }.toMutableList()
-
-                        // Обновляем адаптер отфильтрованным списком
-                        adapter = Dish(filteredDishes)
-                        binding.recyclerView.adapter = adapter
-                        return true
-                    }
-                })
-            }
-
+                }
             override fun onCancelled(databaseError: DatabaseError) {
                 // Обработка ошибок
                 Log.e("Firebase", "Ошибка: ${databaseError.message}")
