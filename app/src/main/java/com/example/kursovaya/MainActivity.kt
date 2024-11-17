@@ -23,7 +23,11 @@ import com.example.kursovaya.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
+class IsAdmin {
+    companion object {
+        var isAdmin: Boolean = false
+    }
+}
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
@@ -34,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
         binding.loginButtonContinue.setOnClickListener {
             var loginLogin: String = binding.loginText.getText().toString()
+            IsAdmin.isAdmin=isAdmin(loginLogin)
             var passwordLogin: String = binding.loginPasswordText.getText().toString()
             if (passwordLogin.length<6) {
                 Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
@@ -93,6 +98,9 @@ class MainActivity : AppCompatActivity() {
                     }
             }
         }
+    }
+    fun isAdmin(loginLogin: String): Boolean{
+        return loginLogin=="admin@gmail.com"
     }
     fun changeToLogin(v: View){
         binding.loginLayout.isVisible=true

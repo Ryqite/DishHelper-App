@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
@@ -17,6 +18,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kursovaya.databinding.ActivityMainPageBinding
 import com.example.kursovaya.databinding.DishItemBinding
@@ -25,7 +27,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-
 class MainMenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainPageBinding
     lateinit var listDishes: ListDishes
@@ -33,6 +34,14 @@ class MainMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (IsAdmin.isAdmin==false)
+        {
+            binding.searchName.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+            val params = binding.searchName.layoutParams as ViewGroup.MarginLayoutParams
+            params.setMargins(15, 0, 15, 0) // установка отступов слева, сверху, справа и снизу
+            binding.searchName.layoutParams = params
+            binding.floatingActionButton.visibility = View.GONE
+        }
         binding.recyclerView.setLayoutManager(LinearLayoutManager(this))
         val options: FirebaseRecyclerOptions<DishItem> = FirebaseRecyclerOptions
             .Builder<DishItem>()

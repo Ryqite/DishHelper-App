@@ -15,7 +15,7 @@
     <string name="dish_icon">Иконка</string>
     <string name="composition_title">Состав:</string>
     <string name="recipe_text">Рецепт:</string>
-    <string name="exit">Exit</string>
+    <string name="exit" translatable="false">Exit</string>
     <string name="content_error">Content_error</string>
-    <string name="return_button" translatable="false">Exit</string>
+    <string name="return_button">Назад</string>
 </resources>
