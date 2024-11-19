@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kursovaya.databinding.DishItemBinding
 
-class DishPage(val dishes: List<DishItem>, private val idList: List<String>) :
+class DishPage(val dishes: List<DishItem>, val idList: List<String>) :
 RecyclerView.Adapter<DishPage.MyHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
@@ -23,9 +23,8 @@ RecyclerView.Adapter<DishPage.MyHolder>() {
 
         // Установка обработчика клика на элемент
         holder.itemView.setOnClickListener { view ->
-            Log.d("DishPage", "Clicked on: ${dish.name}")
             val intent = Intent(view.context, ActivityDishPage::class.java)
-            intent.putExtra("dishID", dishID) // Передаем ключ узла
+            intent.putExtra("dish", dish) // Передаем объект блюда
             view.context.startActivity(intent)
         }
     }

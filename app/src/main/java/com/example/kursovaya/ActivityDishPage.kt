@@ -25,33 +25,27 @@ class ActivityDishPage : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dish_page)
 
-        val dishKey = intent.getStringExtra("dishKey")
-        if (dishKey != null) {
-            loadDishData(dishKey)
+        // Используем View Binding
+        binding = ActivityDishPageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Получаем объект блюда из Intent
+        val dish = intent.getSerializableExtra("dish") as? DishItem
+        if (dish != null) {
+            displayDishData(dish)
         }
     }
 
-    private fun loadDishData(dishKey: String) {
-        val database = FirebaseDatabase.getInstance().getReference("dishes").child(dishKey)
+    private fun displayDishData(dish: DishItem) {
+        binding.dishPageText.text = dish.name
+        binding.recipeText.text = dish.recipe
+        binding.compositionText.text = dish.composition
 
-        database.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val dish = snapshot.getValue(DishItem::class.java)
-                if (dish != null) {
-                    binding.dishPageText.text = dish.name
-                    binding.recipeText.text = dish.recipe
-                    binding.compositionText.text = dish.composition
-                    Glide.with(this@ActivityDishPage)
-                        .load(dish.image)
-                        .into(binding.imageViewDishPage)
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("Firebase", "Error: ${error.message}")
-            }
-        })
+        Glide.with(this)
+            .load(dish.image)
+            .placeholder(com.google.android.gms.base.R.drawable.common_google_signin_btn_icon_dark)
+            .error(com.google.android.gms.base.R.drawable.common_google_signin_btn_icon_dark_normal)
+            .into(binding.imageViewDishPage)
     }
 }

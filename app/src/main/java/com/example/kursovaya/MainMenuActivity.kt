@@ -114,12 +114,12 @@ class MainMenuActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
-    fun startDishPage(v: View) {
-        val dishId = dishAdapter.dishes[ChoosedDish.position]
-        val intent = Intent(this, ActivityDishPage::class.java)
-        intent.putExtra("dishID", dishId)
-        startActivity(intent)
-    }
+//    fun startDishPage(v: View) {
+//        val dishId = ChoosedDish.dishId
+//        val intent = Intent(this, ActivityDishPage::class.java)
+//        intent.putExtra("dishID", dishId)
+//        startActivity(intent)
+//    }
 
     private fun textCompositionSearch(str: String) {
         val dishesRef = FirebaseDatabase.getInstance().getReference("dishes")
