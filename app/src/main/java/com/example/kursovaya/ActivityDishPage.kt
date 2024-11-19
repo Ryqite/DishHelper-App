@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.kursovaya.databinding.ActivityDishPageBinding
 import com.example.kursovaya.databinding.DishItemBinding
-import com.example.kursovaya.databinding.DishPageBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -23,28 +22,35 @@ import com.google.firebase.database.ValueEventListener
 
 class ActivityDishPage : AppCompatActivity() {
     private lateinit var binding: ActivityDishPageBinding
-    private lateinit var binding2: DishPageBinding
+    private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        binding= ActivityDishPageBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        val dishId = intent.getStringExtra("dishId")
-        val dishRef:DatabaseReference = FirebaseDatabase.getInstance().getReference("dishes").child(dishId.toString())
-        val dishPages = mutableListOf<DishItem>()
-        val adapter= DishPage(dishPages)
-        binding.recyclerDishPage.adapter=adapter
-        binding.recyclerDishPage.layoutManager = LinearLayoutManager(this)
-        dishRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val dish = dataSnapshot.getValue(DishItem::class.java)
-                if (dish != null) {
+        setContentView(R.layout.activity_dish_page)
 
+        val dishKey = intent.getStringExtra("dishKey")
+        if (dishKey != null) {
+            loadDishData(dishKey)
+        }
+    }
+
+    private fun loadDishData(dishKey: String) {
+        val database = FirebaseDatabase.getInstance().getReference("dishes").child(dishKey)
+
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val dish = snapshot.getValue(DishItem::class.java)
+                if (dish != null) {
+                    binding.dishPageText.text = dish.name
+                    binding.recipeText.text = dish.recipe
+                    binding.compositionText.text = dish.composition
+                    Glide.with(this@ActivityDishPage)
+                        .load(dish.image)
+                        .into(binding.imageViewDishPage)
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e("ActivityDishPage", "Error loading data: ${error.message}")
+                Log.e("Firebase", "Error: ${error.message}")
             }
         })
     }
