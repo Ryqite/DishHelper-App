@@ -52,6 +52,7 @@ class MainMenuActivity : AppCompatActivity() {
 
             val btnCreate: Button = dialogView.findViewById(R.id.createDish)
             val btnUpdate: Button = dialogView.findViewById(R.id.updateDish)
+            val btnDelete: Button = dialogView.findViewById(R.id.deleteDish)
 
             btnCreate.setOnClickListener {
                 bottomSheetDialog.dismiss()
@@ -80,6 +81,20 @@ class MainMenuActivity : AppCompatActivity() {
                 confirmButton.setOnClickListener {
                     updateDialog.dismiss()
                     Toast.makeText(this, "Dish Updated", Toast.LENGTH_SHORT).show()
+                }
+            }
+            btnDelete.setOnClickListener {
+                bottomSheetDialog.dismiss()
+                val deleteDialog = BottomSheetDialog(this)
+                val deleteView = layoutInflater.inflate(R.layout.delete_option, null)
+                deleteDialog.setContentView(deleteView)
+                deleteDialog.show()
+
+                // Настройка кнопок и других элементов в update_option
+                val confirmButton: Button = deleteView.findViewById(R.id.button)
+                confirmButton.setOnClickListener {
+                    deleteDialog.dismiss()
+                    Toast.makeText(this, "Dish Deleted", Toast.LENGTH_SHORT).show()
                 }
             }
         }
