@@ -3,17 +3,20 @@ import com.bumptech.glide.Glide
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -21,28 +24,65 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kursovaya.databinding.ActivityMainPageBinding
+import com.example.kursovaya.databinding.ChooseOptionBinding
+import com.example.kursovaya.databinding.CreateOptionBinding
 import com.example.kursovaya.databinding.DishItemBinding
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-class ChoosedDish{
-    companion object{
-        var dishId:String=""
-        var position:Int=0
-    }
-}
+import com.orhanobut.dialogplus.DialogPlus
+import com.orhanobut.dialogplus.ViewHolder
+
 class MainMenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainPageBinding
     private lateinit var dishAdapter: DishPage
     var idList = mutableListOf<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.floatingActionButton.setOnClickListener {
+            val bottomSheetDialog = BottomSheetDialog(this)
+            val dialogView = layoutInflater.inflate(R.layout.choose_option, null)
+            bottomSheetDialog.setContentView(dialogView)
+            bottomSheetDialog.show()
 
+            val btnCreate: Button = dialogView.findViewById(R.id.createDish)
+            val btnUpdate: Button = dialogView.findViewById(R.id.updateDish)
+
+            btnCreate.setOnClickListener {
+                bottomSheetDialog.dismiss()
+                val createDialog = BottomSheetDialog(this)
+                val createView = layoutInflater.inflate(R.layout.create_option, null)
+                createDialog.setContentView(createView)
+                createDialog.show()
+
+                // Настройка кнопок и других элементов в create_option
+                val confirmButton: Button = createView.findViewById(R.id.button)
+                confirmButton.setOnClickListener {
+                    createDialog.dismiss()
+                    Toast.makeText(this, "Dish Created", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            btnUpdate.setOnClickListener {
+                bottomSheetDialog.dismiss()
+                val updateDialog = BottomSheetDialog(this)
+                val updateView = layoutInflater.inflate(R.layout.update_option, null)
+                updateDialog.setContentView(updateView)
+                updateDialog.show()
+
+                // Настройка кнопок и других элементов в update_option
+                val confirmButton: Button = updateView.findViewById(R.id.button)
+                confirmButton.setOnClickListener {
+                    updateDialog.dismiss()
+                    Toast.makeText(this, "Dish Updated", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
         if (!IsAdmin.isAdmin) {
             binding.searchName.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
             val params = binding.searchName.layoutParams as ViewGroup.MarginLayoutParams
@@ -83,7 +123,6 @@ class MainMenuActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun loadDishes() {
         val dishesRef = FirebaseDatabase.getInstance().getReference("dishes")
         dishesRef.addValueEventListener(object : ValueEventListener {
@@ -114,12 +153,6 @@ class MainMenuActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
-//    fun startDishPage(v: View) {
-//        val dishId = ChoosedDish.dishId
-//        val intent = Intent(this, ActivityDishPage::class.java)
-//        intent.putExtra("dishID", dishId)
-//        startActivity(intent)
-//    }
 
     private fun textCompositionSearch(str: String) {
         val dishesRef = FirebaseDatabase.getInstance().getReference("dishes")

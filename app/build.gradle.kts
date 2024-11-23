@@ -40,6 +40,7 @@ buildFeatures{
 }
 
 dependencies {
+    implementation("com.orhanobut:dialogplus:1.11@aar")
     implementation("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
     implementation("com.google.firebase:firebase-auth:23.1.0")
