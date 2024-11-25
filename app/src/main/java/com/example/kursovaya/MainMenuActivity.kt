@@ -1,40 +1,21 @@
 package com.example.kursovaya
-import com.bumptech.glide.Glide
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.SearchView
-import android.widget.TableLayout
-import android.widget.TableRow
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kursovaya.databinding.ActivityMainPageBinding
-import com.example.kursovaya.databinding.ChooseOptionBinding
-import com.example.kursovaya.databinding.CreateOptionBinding
-import com.example.kursovaya.databinding.DishItemBinding
-import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.orhanobut.dialogplus.DialogPlus
-import com.orhanobut.dialogplus.ViewHolder
 
 class MainMenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainPageBinding
@@ -45,6 +26,7 @@ class MainMenuActivity : AppCompatActivity() {
         binding = ActivityMainPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.floatingActionButton.setOnClickListener {
+
             val bottomSheetDialog = BottomSheetDialog(this)
             val dialogView = layoutInflater.inflate(R.layout.choose_option, null)
             bottomSheetDialog.setContentView(dialogView)
@@ -60,12 +42,27 @@ class MainMenuActivity : AppCompatActivity() {
                 val createView = layoutInflater.inflate(R.layout.create_option, null)
                 createDialog.setContentView(createView)
                 createDialog.show()
+                val createDishID: EditText = createView.findViewById(R.id.CreateDishID)
+                val createName: EditText = createView.findViewById(R.id.CreateName)
+                val createImage: EditText = createView.findViewById(R.id.CreateImage)
+                val createComposition: EditText = createView.findViewById(R.id.CreateComposition)
+                val createRecipe: EditText = createView.findViewById(R.id.CreateRecipe)
 
                 // Настройка кнопок и других элементов в create_option
-                val confirmButton: Button = createView.findViewById(R.id.button)
+                val confirmButton: Button = createView.findViewById(R.id.createButton)
                 confirmButton.setOnClickListener {
-                    createDialog.dismiss()
-                    Toast.makeText(this, "Dish Created", Toast.LENGTH_SHORT).show()
+                    val dishId = createDishID.text.toString().trim()
+                    val name = createName.text.toString().trim()
+                    val image = createImage.text.toString().trim()
+                    val composition = createComposition.text.toString().trim()
+                    val recipe = createRecipe.text.toString().trim()
+
+                    if (dishId.isEmpty() || name.isEmpty() || composition.isEmpty() || recipe.isEmpty()) {
+                        Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                    } else {
+                        saveDishToFirebase(dishId, name, image, composition, recipe)
+                        createDialog.dismiss()
+                    }
                 }
             }
 
@@ -77,7 +74,7 @@ class MainMenuActivity : AppCompatActivity() {
                 updateDialog.show()
 
                 // Настройка кнопок и других элементов в update_option
-                val confirmButton: Button = updateView.findViewById(R.id.button)
+                val confirmButton: Button = updateView.findViewById(R.id.createButton)
                 confirmButton.setOnClickListener {
                     updateDialog.dismiss()
                     Toast.makeText(this, "Dish Updated", Toast.LENGTH_SHORT).show()
@@ -90,8 +87,8 @@ class MainMenuActivity : AppCompatActivity() {
                 deleteDialog.setContentView(deleteView)
                 deleteDialog.show()
 
-                // Настройка кнопок и других элементов в update_option
-                val confirmButton: Button = deleteView.findViewById(R.id.button)
+                // Настройка кнопок и других элементов в delete_option
+                val confirmButton: Button = deleteView.findViewById(R.id.createButton)
                 confirmButton.setOnClickListener {
                     deleteDialog.dismiss()
                     Toast.makeText(this, "Dish Deleted", Toast.LENGTH_SHORT).show()
@@ -161,6 +158,20 @@ class MainMenuActivity : AppCompatActivity() {
             }
         })
     }
+    private fun saveDishToFirebase(dishId: String, name: String, image: String, composition: String, recipe: String) {
+        val database = FirebaseDatabase.getInstance().getReference("dishes")
+        val dish = DishItem(name, image, composition, recipe)
+
+        // Сохраняем данные в Firebase
+        database.child(dishId).setValue(dish)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Dish successfully created!", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to create dish: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     fun finishProcess(v: View) {
         finishAffinity()
     }

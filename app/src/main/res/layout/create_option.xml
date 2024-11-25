@@ -31,6 +31,7 @@
         android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/CreateDishID"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -49,6 +50,7 @@
         android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/CreateName"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -67,6 +69,7 @@
         android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/CreateImage"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -85,6 +88,7 @@
         android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/CreateComposition"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -103,6 +107,7 @@
         android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/CreateRecipe"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -110,7 +115,7 @@
         android:background="@drawable/choose_option_design" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/createButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
