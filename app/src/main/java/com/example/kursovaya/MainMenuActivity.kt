@@ -74,10 +74,28 @@ class MainMenuActivity : AppCompatActivity() {
                 updateDialog.show()
 
                 // Настройка кнопок и других элементов в update_option
-                val confirmButton: Button = updateView.findViewById(R.id.createButton)
-                confirmButton.setOnClickListener {
+                val updateButton: Button = updateView.findViewById(R.id.updateButton)
+                val updateDishId: EditText = updateView.findViewById(R.id.updateDishId)
+                val updateName: EditText = updateView.findViewById(R.id.updateName)
+                val updateImage: EditText = updateView.findViewById(R.id.updateImage)
+                val updateComposition: EditText = updateView.findViewById(R.id.updateComposition)
+                val updateRecipe: EditText = updateView.findViewById(R.id.updateRecipe)
+
+                updateButton.setOnClickListener {
+                    val dishId = updateDishId.text.toString().trim()
+                    val name = updateName.text.toString().trim()
+                    val image = updateImage.text.toString().trim()
+                    val composition = updateComposition.text.toString().trim()
+                    val recipe = updateRecipe.text.toString().trim()
+
+                    if (dishId.isEmpty()) {
+                        Toast.makeText(this, "DishID is required", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+
+                    // Обновление блюда
+                    updateDishInFirebase(dishId, name, image, composition, recipe)
                     updateDialog.dismiss()
-                    Toast.makeText(this, "Dish Updated", Toast.LENGTH_SHORT).show()
                 }
             }
             btnDelete.setOnClickListener {
@@ -88,7 +106,7 @@ class MainMenuActivity : AppCompatActivity() {
                 deleteDialog.show()
 
                 // Настройка кнопок и других элементов в delete_option
-                val confirmButton: Button = deleteView.findViewById(R.id.createButton)
+                val confirmButton: Button = deleteView.findViewById(R.id.deleteButton)
                 confirmButton.setOnClickListener {
                     deleteDialog.dismiss()
                     Toast.makeText(this, "Dish Deleted", Toast.LENGTH_SHORT).show()
@@ -171,7 +189,37 @@ class MainMenuActivity : AppCompatActivity() {
                 Toast.makeText(this, "Failed to create dish: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+    private fun updateDishInFirebase(dishId: String, name: String, image: String, composition: String, recipe: String) {
+        val dishesRef = FirebaseDatabase.getInstance().getReference("dishes")
 
+        dishesRef.child(dishId).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val updatedData = mutableMapOf<String, Any>()
+
+                    if (name.isNotEmpty()) updatedData["name"] = name
+                    if (image.isNotEmpty()) updatedData["image"] = image
+                    if (composition.isNotEmpty()) updatedData["composition"] = composition
+                    if (recipe.isNotEmpty()) updatedData["recipe"] = recipe
+
+                    // Обновление данных блюда
+                    dishesRef.child(dishId).updateChildren(updatedData)
+                        .addOnSuccessListener {
+                            Toast.makeText(this@MainMenuActivity, "Dish updated successfully", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { error ->
+                            Toast.makeText(this@MainMenuActivity, "Error updating dish: ${error.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    Toast.makeText(this@MainMenuActivity, "Dish not found", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.e("Firebase", "Error: ${databaseError.message}")
+            }
+        })
+    }
     fun finishProcess(v: View) {
         finishAffinity()
     }
