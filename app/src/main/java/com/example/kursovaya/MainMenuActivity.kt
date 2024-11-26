@@ -106,10 +106,16 @@ class MainMenuActivity : AppCompatActivity() {
                 deleteDialog.show()
 
                 // Настройка кнопок и других элементов в delete_option
+                val deleteDishId: EditText=deleteView.findViewById(R.id.deleteDishId)
                 val confirmButton: Button = deleteView.findViewById(R.id.deleteButton)
                 confirmButton.setOnClickListener {
-                    deleteDialog.dismiss()
-                    Toast.makeText(this, "Dish Deleted", Toast.LENGTH_SHORT).show()
+                    val dishId: String=deleteDishId.text.toString().trim()
+                    if (dishId.isNotEmpty()) {
+                        deleteDishFromFirebase(dishId)
+                        deleteDialog.dismiss()
+                    } else {
+                        Toast.makeText(this, "Please enter a valid Dish ID", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -220,6 +226,30 @@ class MainMenuActivity : AppCompatActivity() {
             }
         })
     }
+    private fun deleteDishFromFirebase(dishId: String) {
+        val dishesRef = FirebaseDatabase.getInstance().getReference("dishes")
+
+        dishesRef.child(dishId).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    dishesRef.child(dishId).removeValue()
+                        .addOnSuccessListener {
+                            Toast.makeText(this@MainMenuActivity, "Dish deleted successfully", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { error ->
+                            Toast.makeText(this@MainMenuActivity, "Error deleting dish: ${error.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    Toast.makeText(this@MainMenuActivity, "Dish not found", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.e("Firebase", "Error: ${databaseError.message}")
+            }
+        })
+    }
+
     fun finishProcess(v: View) {
         finishAffinity()
     }
