@@ -10,7 +10,7 @@
       </SelectionState>
       <SelectionState runConfigName="KURSOVAYA">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-11-23T23:06:09.676434400Z">
+        <DropdownSelection timestamp="2024-11-26T19:24:06.152884700Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\garba\.android\avd\Medium_Phone_API_30.avd" />

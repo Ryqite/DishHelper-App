@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:visibility="visible"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".MainMenuActivity"
-    >
+    android:visibility="visible"
+    tools:context=".MainMenuActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -23,11 +23,11 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:gravity="center"
         android:text="DishID "
         android:textColor="@color/black"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:textSize="20sp" />
 
     <EditText
@@ -36,16 +36,19 @@
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/choose_option_design" />
+        android:background="@drawable/choose_option_design"
+        android:gravity="center"
+        android:hint="dishID"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/button_continue"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/button_continue"
         android:text="Confirm"
         android:textSize="20sp" />
 
