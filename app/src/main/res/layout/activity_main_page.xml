@@ -4,7 +4,7 @@
     android:id="@+id/main_dish_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_shape"
+    android:background="#D1F6EA"
     tools:context=".MainMenuActivity">
 
     <LinearLayout
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="4dp"
             android:layout_marginTop="5dp"
-            android:background="@color/low_divider" />
+            android:background="@color/button_continue" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                     android:layout_marginEnd="1dp"
                     android:gravity="center"
                     android:text="@string/exit"
-                    android:textColor="@color/low_divider"
+                    android:textColor="@color/button_continue"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -68,7 +68,7 @@
                 android:id="@+id/vertical_divider1"
                 android:layout_width="3dp"
                 android:layout_height="match_parent"
-                android:background="@color/low_divider" />
+                android:background="@color/button_continue" />
 
             <SearchView
                 android:id="@+id/search_composition"
@@ -92,13 +92,13 @@
                 android:id="@+id/vertical_divider2"
                 android:layout_width="3dp"
                 android:layout_height="match_parent"
-                android:background="@color/low_divider" />
+                android:background="@color/button_continue" />
 
             <android.widget.Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/low_divider"
+                android:background="@color/button_continue"
                 android:onClick="backToAuthentication"
                 android:text="@string/return_button"
                 android:textAllCaps="false"
@@ -110,7 +110,7 @@
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="4dp"
-            android:background="@color/low_divider" />
+            android:background="@color/button_continue" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -122,7 +122,7 @@
             android:id="@+id/divider3"
             android:layout_width="match_parent"
             android:layout_height="4dp"
-            android:background="@color/low_divider" />
+            android:background="@color/button_continue" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
