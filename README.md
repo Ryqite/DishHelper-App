@@ -9,10 +9,8 @@ Used libraries: Firebase Auth, Firebase UI and etc.(check gradle for more inform
 --------------------------------------------------------------------------------------
 Screenshots of app's work and design are below.  
 --------------------------------------------------------------------------------------
-![{8B37089D-CD1B-47D4-9C53-B15884F96505}](https://github.com/user-attachments/assets/4ff8cede-1371-4a04-9f90-b47e7a8536ae)
-![{D732D1E9-E82B-40BF-A9BD-76AB50B483BB}](https://github.com/user-attachments/assets/bb4458c0-0cfe-463d-b9c2-d1a7cd583c40)
-![{5CFBE664-3408-4D80-B314-5B513BE51B4C}](https://github.com/user-attachments/assets/73d8bb44-6df5-4a84-acc5-ccf854d6e075)
-![image](https://github.com/user-attachments/assets/d58e1bef-d810-469d-b4ac-589231338784)
-![image](https://github.com/user-attachments/assets/f44dfb65-4e15-40a3-833f-e001b660c85e)
-![{D9B93281-3DC7-47C3-9447-1B8EC8D70FB9}](https://github.com/user-attachments/assets/171eadb9-c1a4-4d25-bca4-76c5db7fe6bd)
 ![{C848DF42-369B-4AA8-8E99-CFA44CBC1505}](https://github.com/user-attachments/assets/0522e007-1fd2-42ab-a9a4-fc108ac58d8d)
+![{430E55B5-01A8-4106-8F37-6701C0E8D5B9}](https://github.com/user-attachments/assets/c65e92ac-4c80-4467-82a7-1c90542c61c0)
+![{6E634966-AF8E-4554-A82D-3B6E72397BB9}](https://github.com/user-attachments/assets/6d2ab6e9-fa64-4d8d-ad5c-586bb5c721cf)
+![image](https://github.com/user-attachments/assets/7c0545fc-6bb3-4e67-898e-b2c0d61057f8)
+![image](https://github.com/user-attachments/assets/2e3f6a8f-8602-4103-8c26-f85b98f26046)
