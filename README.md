@@ -15,3 +15,4 @@ Screenshots of app's work and design are below.
 ![image](https://github.com/user-attachments/assets/d58e1bef-d810-469d-b4ac-589231338784)
 ![image](https://github.com/user-attachments/assets/f44dfb65-4e15-40a3-833f-e001b660c85e)
 ![{D9B93281-3DC7-47C3-9447-1B8EC8D70FB9}](https://github.com/user-attachments/assets/171eadb9-c1a4-4d25-bca4-76c5db7fe6bd)
+![{C848DF42-369B-4AA8-8E99-CFA44CBC1505}](https://github.com/user-attachments/assets/0522e007-1fd2-42ab-a9a4-fc108ac58d8d)
